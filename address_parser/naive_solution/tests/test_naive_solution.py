@@ -1,4 +1,4 @@
-from naive_solution.src.address_parser import parse_address
+from address_parser.naive_solution.src.address_parser import parse_address
 
 
 def test_parse_address():

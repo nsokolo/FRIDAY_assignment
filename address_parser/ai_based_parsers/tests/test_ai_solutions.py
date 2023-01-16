@@ -1,5 +1,5 @@
-from ai_based_parsers.src.main_deepparser import parse_address as deepparser
-from ai_based_parsers.src.main_libpostal import parse_address as libpostal
+from ai_based_parsers.src.parser_deepparser import parse_address as deepparser
+from ai_based_parsers.src.parser_libpostal import parse_address as libpostal
 
 
 def test_deepparser():

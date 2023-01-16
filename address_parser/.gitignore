@@ -16,7 +16,7 @@ eggs/
 .eggs/
 lib/
 lib64/
-libpostal/
+../libpostal/
 parts/
 sdist/
 var/

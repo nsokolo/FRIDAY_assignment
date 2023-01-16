@@ -1,0 +1,42 @@
+#!/usr/bin/env python
+
+import argparse
+from ai_based_parsers.src.parser_deepparser import parse_address as deepparser_parser
+from ai_based_parsers.src.parser_libpostal import parse_address as libpostal_parser
+from naive_solution.src.address_parser import parse_address as naive_parser
+
+
+class CustomException(Exception):
+    pass
+
+
+def parse_address(params: {}):
+    function = params.get('function')
+    input_addresses = params['address']
+    if function == 'deepparser':
+        for input_address in input_addresses:
+            print(f"deepparser result: {deepparser_parser(input_address=input_address)}")
+    elif function == 'libpostal':
+        for input_address in input_addresses:
+            print(f"libpostal result: {libpostal_parser(input_address=input_address)}")
+    elif function == 'naive':
+        for input_address in input_addresses:
+            print(f"naive result: {naive_parser(input_address=input_address)}")
+    elif function is None:
+        for input_address in input_addresses:
+            print(f"deepparser result: {deepparser_parser(input_address=input_address)}")
+            print(f"libpostal result: {libpostal_parser(input_address=input_address)}")
+            print(f"naive result: {naive_parser(input_address=input_address)}")
+    else:
+        raise CustomException('invalid function')
+
+
+if __name__ == "__main__":
+    parser = argparse.ArgumentParser(prog='parse_address')
+    parser.add_argument('--function', required=False, choices=['deepparser', 'libpostal', 'naive'],
+                        help="You can specify which module you want to use to parse your address. "
+                             "If not provided, all three will be executed")
+    parser.add_argument('--address', nargs='+', required=True, help="Address you want to parse")
+
+    args = parser.parse_args()
+    parse_address(vars(args))

@@ -16,14 +16,15 @@ def parse_address(input_address: str) -> {}:
 
 
 if __name__ == "__main__":
-    print(parse_address("Winterallee 3"))
-    print(parse_address("Musterstrasse 45"))
-    print(parse_address("Blaufeldweg 123B"))
-
-    print(parse_address("Am Bächle 23"))
-    print(parse_address("Auf der Vogelwiese 23 b"))
-
-    print(parse_address("4, rue de la revolution"))
-    print(parse_address("200 Broadway Av"))
-    print(parse_address("Calle Aduana, 29"))
-    print(parse_address("Calle 39 No 1540"))
+    inputs = [
+        "Winterallee 3", "Musterstrasse 45",
+        "Blaufeldweg 123B",
+        "Am Bächle 23",
+        "Auf der Vogelwiese 23 b",
+        "4, rue de la revolution",
+        "200 Broadway Av",
+        "Calle Aduana, 29",
+        "Calle 39 No 1540"
+    ]
+    for input_ad in inputs:
+        print(parse_address(input_address=input_ad))
