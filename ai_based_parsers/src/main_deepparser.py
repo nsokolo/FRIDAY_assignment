@@ -2,18 +2,6 @@ from deepparse.parser import AddressParser
 import re
 
 
-class SimpleModel:
-    street: str
-    housenumber: str
-
-    @staticmethod
-    def validate_address(input_address: str):
-        address_list = input_address.split(" ")
-        if len(address_list) == 2:
-            if not address_list[0].isdigit() and address_list[1].isdigit():
-                return {"street": address_list[0], "housenumber": address_list[1]}
-
-
 def parse_address(input_address: str) -> {}:
     res = {}
     address_parser = AddressParser(model_type="fastText", device=0, verbose=False)
