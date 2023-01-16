@@ -14,9 +14,9 @@ class BaseModel:
 class SimpleModel(BaseModel):
     def validate_address(self, input_address: str) -> Union[SimpleModel, bool]:
         input_split = re.split(' |, ', input_address)
-        reg_exp = "([a-zA-ZäöüÄÖÜß]+\s*)+[,]*\s*[0-9]+\s*([a-zA-Z]+)*"
+        reg_exp = r"([a-zA-ZäöüÄÖÜß]+\s*)+[,]*\s*[0-9]+\s*([a-zA-Z]+)*"
         if re.match(reg_exp, input_address):
-            reg_exp = "(([a-zA-ZäöüÄÖÜß]+)\s)+[,]*[0-9]+\s([a-zA-Z]+)*"
+            reg_exp = r"(([a-zA-ZäöüÄÖÜß]+)\s)+[,]*[0-9]+\s([a-zA-Z]+)*"
             if re.match(reg_exp, input_address):
                 self.street = " ".join(input_split[:-2])
                 self.house_number = " ".join(input_split[-2:])
@@ -31,7 +31,7 @@ class SimpleModel(BaseModel):
 class NumberStreetModel(BaseModel):
     def validate_address(self, input_address: str) -> Union[NumberStreetModel, bool]:
         input_split = re.split(' |, ', input_address)
-        reg_exp = "([0-9]+)([a-zA-Z]+)*[,]*(\s*[a-zA-ZäöüÄÖÜß]+)*"
+        reg_exp = r"([0-9]+)([a-zA-Z]+)*[,]*(\s*[a-zA-ZäöüÄÖÜß]+)*"
         if re.match(reg_exp, input_address):
             self.street = " ".join(input_split[1:])
             self.house_number = input_split[0]
