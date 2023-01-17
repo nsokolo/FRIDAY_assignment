@@ -3,6 +3,10 @@ import re
 from typing import Union
 
 
+class CustomException(Exception):
+    pass
+
+
 class BaseModel:
     street: str
     house_number: str
@@ -46,21 +50,16 @@ def model_to_dict(model: Union[NumberStreetModel, SimpleModel]) -> {}:
 
 def parse_address(input_address: str) -> {}:
     models_list = [NumberStreetModel(), SimpleModel()]
-    result = [model.validate_address(input_address) for model in models_list
-              if model.validate_address(input_address)][0]
-    return model_to_dict(result)
+    result = [model.validate_address(input_address) for model in models_list if model.validate_address(input_address)]
+    if len(result) > 0:
+        return model_to_dict(result[0])
+    else:
+        raise CustomException("FAILED TO PARSE")
 
 
 if __name__ == '__main__':
     inputs = [
-        "Winterallee 3", "Musterstrasse 45",
-        "Blaufeldweg 123B",
-        "Am Bächle 23",
-        "Auf der Vogelwiese 23 b",
-        "4, rue de la revolution",
-        "200 Broadway Av",
-        "Calle Aduana, 29",
-        "Calle 39 No 1540"
+        "Jana Pawła Woronicza 33B/56"
     ]
     for input_ad in inputs:
         print(parse_address(input_address=input_ad))
